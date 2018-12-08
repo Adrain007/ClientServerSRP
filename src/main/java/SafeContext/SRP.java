@@ -75,14 +75,14 @@ public class SRP {
         ArrayList<Long> fact = new ArrayList<Long>();
         long number1 = fi;
         while (number1 % 2 == 0) {
-            number1 = number1 / 2;
+            number1 /= 2;
             fact.add(2L);
         }
-        for (int i = 3; i * i <= number1; i = i + 2) {
+        for (int i = 3; i * i <= number1; i += 2) {
             if (number1 % i == 0) {
-                number1 = number1 / i;
+                number1 /= i;
                 fact.add((long) i);
-                i = i - 2;
+                i -= 2;
             }
         }
         if (number1 != 1) {

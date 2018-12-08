@@ -16,10 +16,6 @@ public class ServerField {
     public HashMap<String, Account> accounts = new HashMap<String, Account>();
 
 
-    void registration(String userId, String user_salt, long pass_verifier) {
-        accounts.put(userId, new Account(pass_verifier, user_salt));
-    }
-
     void receive(String userId, long aBig) {
         accounts.get(userId).setaBig(aBig);
     }
@@ -39,8 +35,8 @@ public class ServerField {
         long aBig = acc.getaBig();
         long b = acc.getB();
         long v = acc.getPass_verifier();
-        BigInteger ex1 = BigInteger.valueOf(v).modPow(U, BigInteger.valueOf(SRP.getN())).pow((int) b);
-        S = ex1.multiply(BigInteger.valueOf(aBig)).mod(BigInteger.valueOf(SRP.getN()));
+        BigInteger ex1 = BigInteger.valueOf(v).modPow(U, BigInteger.valueOf(SRP.getN()));
+        S = ex1.multiply(BigInteger.valueOf(aBig)).modPow(BigInteger.valueOf(b),BigInteger.valueOf(SRP.getN()));
         acc.setKey(SRP.getHash(S.toString().getBytes()));
     }
 

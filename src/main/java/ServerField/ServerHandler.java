@@ -51,9 +51,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                 }
                 if (!"0".equals(server.scrambler(user))) {
                     server.keyCompute(user);
-                    String key = server.accounts.get(user).getKey();
                     server.confirmationHash(user);
-                    System.out.println(key);
                     ctx.write(new Wrapper(2, null, server.accounts.get(user).getM()));
                 } else {
                     ctx.close();

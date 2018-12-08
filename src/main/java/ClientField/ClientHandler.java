@@ -14,24 +14,12 @@ import java.util.Scanner;
  * first message to the server.
  */
 public class ClientHandler extends ChannelInboundHandlerAdapter {
-
-    //private final List<Integer> firstMessage;
-    public final ArrayList<String> firstMessage = new ArrayList<String>();
     private ClientField client;
-
-
     /**
      * Creates a client-side handler.
      */
     public ClientHandler() {
-        /*
-        firstMessage = new ArrayList<Integer>(ClientField.ObjectEchoClient.SIZE);
-        for (int i = 0; i < ClientField.ObjectEchoClient.SIZE; i ++) {
-        firstMessage.add(Integer.valueOf(i));
-        }
-        */
-        firstMessage.add("netty");
-        firstMessage.add("hueta");
+
     }
 
     @Override
@@ -88,9 +76,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
                         client.setbBig(b);
                         if (!"0".equals(client.scrambler())) {
                             client.keyComp();
-                            String key = client.key;
                             String a = client.confirmationHash();
-                            System.out.println(key);
                             ArrayList<Object> data = new ArrayList<Object>();
                             data.add(client.getId());
                             data.add(a);
