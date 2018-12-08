@@ -51,9 +51,9 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                 }
                 if (!"0".equals(server.scrambler(user))) {
                     server.keyCompute(user);
-                    String sd = server.accounts.get(user).getKey();
+                    String key = server.accounts.get(user).getKey();
                     server.confirmationHash(user);
-                    System.out.println(server.accounts.get(user).getM());
+                    System.out.println(key);
                     ctx.write(new Wrapper(2, null, server.accounts.get(user).getM()));
                 } else {
                     ctx.close();
@@ -68,7 +68,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                 break;
             case 4:
                 if (data.get(1).equals(server.accounts.get(user).getR())) {
-                    System.out.println("Server you are real");
+                    System.out.println("Its real client!!!");
                 } else {
                     ctx.close();
                 }

@@ -39,11 +39,11 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         String id = "";
         String pass = "";
         Scanner in = new Scanner(System.in);
-        System.out.println("Enter Username");
+        System.out.println("Enter Username: ");
         if (in.hasNextLine()) {
             id = in.nextLine();
         }
-        System.out.println("Enter pass");
+        System.out.println("Enter password: ");
         if (in.hasNextLine()) {
             pass = in.nextLine();
         }
@@ -51,7 +51,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
             client = new ClientField(id, pass);
         } else {
             ctx.close();
-            throw new RuntimeException("Short pass or ID");
+            throw new RuntimeException("Short pass or ID!!!");
         }
         ArrayList<Object> data = new ArrayList<Object>();
         data.add(client.getId());
@@ -88,9 +88,9 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
                         client.setbBig(b);
                         if (!"0".equals(client.scrambler())) {
                             client.keyComp();
-                            String gf = client.key;
+                            String key = client.key;
                             String a = client.confirmationHash();
-                            System.out.println();
+                            System.out.println(key);
                             ArrayList<Object> data = new ArrayList<Object>();
                             data.add(client.getId());
                             data.add(a);
@@ -100,7 +100,6 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
                             throw new RuntimeException("1");
                         }
                     } else {
-
                         ctx.close();
                         throw new RuntimeException("2");
                     }
@@ -121,7 +120,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
                     break;
                 case 3:
                     if (msg1.getObject().equals(client.getR())) {
-                        System.out.println("Its real server");
+                        System.out.println("Its real server!!!");
                     } else {
 
                         ctx.close();

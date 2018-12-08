@@ -43,8 +43,7 @@ public class ClientField {
     void keyComp() {
         BigInteger S;
         BigInteger U = new BigInteger(u, 16);
-        long b = Long.valueOf(BigInteger.valueOf(SRP.getG()).modPow(x, BigInteger.valueOf(SRP.getN())).toString());
-        long ex1 = bBig - SRP.getK() * b;
+        long ex1 = bBig - SRP.getK() * pass_verifier;
         BigInteger ex2 = U.multiply(x).add(BigInteger.valueOf(a));
         S = BigInteger.valueOf(ex1).modPow(ex2, BigInteger.valueOf(SRP.getN()));
         key = SRP.getHash(S.toString().getBytes());
@@ -85,8 +84,7 @@ public class ClientField {
 
     int randomNatural() {
         Random random = new Random(System.currentTimeMillis());
-        int i = random.nextInt(1000000 - 10000) + 10000;
-        return i;
+        return random.nextInt(1000000 - 10000) + 10000;
     }
 
 

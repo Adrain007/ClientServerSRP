@@ -16,7 +16,7 @@ public class SRP {
     private static long g;
 
     public SRP() {
-        n = 29;
+        n = 212501*2+1;
         fi = n - 1;
         g = primitiveRoot(numberFactorization());
     }
